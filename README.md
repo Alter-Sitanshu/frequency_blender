@@ -18,7 +18,7 @@ An independent PyTorch implementation of the FreqBlender paper's method, conside
 
 The scripts also run locally with a compatible PyTorch/torchvision installation plus `pip install -r requirements.txt`. Colab keeps its own matched CUDA torch/torchvision versions. The FaceNet substitute is installed separately with `--no-deps` to avoid replacing Colab's CUDA packages; notebook 01 checks its import and downloads its pretrained weights on first use.
 
-The paper's augmentation is training-only. The proposed speedup comes from a **smaller deployed detector**; the new loss tries to preserve structural forgery sensitivity during distillation. No faster inference or better AUC can be claimed as measured. See [the mathematical proposal and reproduction differences](docs/METHOD.md).
+The paper's augmentation is training-only. The proposed speedup comes from a **smaller deployed detector**; the new loss tries to preserve structural forgery sensitivity during distillation. No faster inference or better AUC can be claimed as measured. See [the mathematical proposal and reproduction differences](report.pdf).
 
 ## FaceForensics++ data
 
@@ -48,4 +48,4 @@ Tests cover DCT against SciPy, gradients through frozen auxiliaries, mask/blendi
 - `freqblender/evaluate.py`: frame/video metrics, source-group bootstrap, timing and export.
 - `scripts/build_notebooks.py`: reproducible notebook generator with embedded source.
 
-Research provenance: [FreqBlender paper](https://arxiv.org/abs/2404.13872), [torchvision EfficientNet-B4](https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.efficientnet_b4.html), [torchvision MobileNetV3-Small](https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.mobilenet_v3_small.html). All extensions and implementation choices are separated in `docs/METHOD.md`.
+Research provenance: [FreqBlender paper](https://arxiv.org/abs/2404.13872), [torchvision EfficientNet-B4](https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.efficientnet_b4.html), [torchvision MobileNetV3-Small](https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.mobilenet_v3_small.html). All extensions and implementation choices are separated in `report.pdf`.
