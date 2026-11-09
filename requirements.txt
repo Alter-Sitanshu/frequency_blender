@@ -1,0 +1,12 @@
+# Keep Colab's matched torch/torchvision CUDA installation.
+numpy>=1.26,<3
+pandas>=2.2,<4
+Pillow>=10,<14
+opencv-python-headless>=4.9,<5
+scikit-learn>=1.4,<2
+matplotlib>=3.8,<4
+tqdm>=4.66,<5
+requests>=2.31,<3
+nbformat>=5.10,<6
+pytest>=8,<10
+# Notebook 01 installs facenet-pytorch==2.6.0 with --no-deps separately.
