@@ -32,6 +32,27 @@ The full method trains several networks and may exceed a single free Colab sessi
 
 To validate without a dataset or pretrained downloads:
 
+# We were forced to follow this approach to avoid huge dataset downloading, having the required function implementations and training on KAGGLE 
+```bash
+import base64, hashlib, io, json, os, sys, subprocess, zipfile
+from pathlib import Path
+payload = ""                    # base64 encoded folder    ------ We used base64 encoded the zipped folder to unzip the freqblender implementations in the /kaggle/working
+PROJECT = Path("/kaggle/working/freqblender_project")
+PROJECT.mkdir(parents=True, exist_ok=True)
+with zipfile.ZipFile(io.BytesIO(payload)) as archive:
+    for member in archive.infolist():
+        target = (PROJECT / member.filename).resolve()
+        if not target.is_relative_to(PROJECT.resolve()):
+            raise ValueError("Unsafe archive path")
+    archive.extractall(PROJECT)
+os.chdir(PROJECT)
+if str(PROJECT) not in sys.path:
+    sys.path.insert(0, str(PROJECT))
+subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", "requirements.txt"], check=True)
+import torch, torchvision
+print("PyTorch", torch.__version__, "torchvision", torchvision.__version__)
+print("GPU:", torch.cuda.get_device_name(0) if torch.cuda.is_available() else "CPU")
+```
 ```bash
 python -m pytest tests -q
 python scripts/build_notebooks.py
